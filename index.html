@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="fr">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Friends - Réseau des Jeunes Professionnels du Numérique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+     <link rel="icon" type="image/png" href="DF.png" />
+    <link rel="apple-touch-icon" href="DF.png" />
+    <link rel="manifest" href="manifest.json" />
+
+    <style>
+        /* Variables CSS basées sur les couleurs */
+        :root {
+            --primary-green: #375b4f;
+            --primary-yellow: #eeb55f;
+            --light-green: #7ca895;
+            --dark: #222222;
+            --light: #ffffff;
+            --gray: #f4f4f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--light);
+            padding: 10px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+           /* mix-blend-mode: multiply;*/
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-yellow);
+        }
+
+        /* Bouton Menu Hamburger (caché sur PC) */
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            color: var(--primary-green);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        #accueil {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(55, 91, 79, 0.9), rgba(55, 91, 79, 0.8)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            color: var(--light);
+            padding: 0 20px;
+            margin-top: 85px; 
+        }
+
+        #accueil h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        #accueil h2 {
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--primary-yellow);
+            margin-bottom: 30px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-yellow);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background-color: #dca34d;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--light);
+            border: 2px solid var(--light);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light);
+            color: var(--primary-green);
+        }
+
+        /* Sections Générales */
+        section {
+            padding: 80px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: var(--primary-green);
+            margin-bottom: 40px;
+        }
+
+        /* À Propos */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .valeurs-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .valeur-badge {
+            background-color: var(--light-green);
+            color: var(--light);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        /* Services */
+        #services {
+            background-color: var(--gray);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--primary-yellow);
+        }
+
+        .service-card i {
+            font-size: 40px;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        /* Statistiques */
+        #stats {
+            background-color: var(--primary-green);
+            color: var(--light);
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            padding: 50px 10%;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            color: var(--primary-yellow);
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            background-color: #ddd;
+            height: 250px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* Equipe */
+        #equipe {
+            background-color: var(--gray);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .team-member {
+            background: var(--light);
+            padding: 25px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-member img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 4px solid var(--primary-green);
+        }
+
+        .team-member h3 {
+            font-size: 18px;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .team-member p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .btn-member-portfolio {
+            display: inline-block;
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .btn-member-portfolio:hover {
+            background-color: var(--primary-green);
+            color: var(--light);
+        }
+
+        /* Contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        button.submit-btn {
+            background-color: var(--primary-green);
+            color: var(--light);
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        button.submit-btn:hover {
+            background-color: #2c4a40;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* WhatsApp Flottant Animé */
+        @keyframes pulse-whatsapp {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 35px; /* Icône un peu plus grande */
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            text-decoration: none;
+            animation: pulse-whatsapp 2s infinite; /* Animation d'attraction */
+        }
+
+        /* RESPONSIVE DESIGN (Mobiles & Tablettes) */
+        @media (max-width: 768px) {
+            nav {
+                padding: 10px 20px;
+            }
+            
+            .menu-toggle { 
+                display: block; /* Affiche l'icône hamburger */
+            }
+            
+            /* Le menu devient une colonne cachée par défaut */
+            .nav-links { 
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--light);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                display: none; 
+            }
+            
+            /* Classe activée via JavaScript pour afficher le menu */
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                margin: 10px 0;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 10px;
+                font-size: 18px;
+            }
+
+            .about-content, .contact-container { grid-template-columns: 1fr; }
+            #stats { flex-direction: column; gap: 30px; }
+            #accueil h1 { font-size: 36px; }
+        }
+    </style>
+
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <img src="DF1.png" alt="Digital Friends Logo">
+        </div>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#apropos">À propos</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Réalisations</a></li>
+            <li><a href="#equipe">Équipe</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header id="accueil">
+        <h1>Digital Friends</h1>
+        <h2>Former, créer et connecter.</h2>
+        <div class="btn-container">
+            <a href="#services" class="btn btn-primary">Nos services</a>
+            <a href="#contact" class="btn btn-secondary">Nous contacter</a>
+        </div>
+    </header>
+
+    <section id="apropos">
+        <h2 class="section-title">À Propos de Nous</h2>
+        <div class="about-content">
+            <div>
+                <h3>Notre Vision</h3>
+                <p>Devenir un réseau de référence dans le numérique en Afrique, où les talents sont formés, connectés et valorisés à travers des services digitaux innovants et professionnels.</p>
+                
+                <h3 style="margin-top: 20px;">Nos Missions</h3>
+                <ul>
+                    <li>Offrir des services numériques de qualité.</li>
+                    <li>Former des talents du digital pour résoudre des problèmes.</li>
+                    <li>Rassembler les professionnels du numérique et encourager l'entrepreneuriat.</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Nos Valeurs</h3>
+                <p>Notre travail est guidé par des principes forts qui garantissent la satisfaction de nos clients et la qualité de nos projets :</p>
+                <div class="valeurs-list">
+                    <span class="valeur-badge">Intégrité</span>
+                    <span class="valeur-badge">Rapidité</span>
+                    <span class="valeur-badge">Créativité</span>
+                    <span class="valeur-badge">Professionnalisme</span>
+                    <span class="valeur-badge">Collaboration</span>
+                    <span class="valeur-badge">Excellence</span>
+                    <span class="valeur-badge">Honnêteté</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title">Nos Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fa-solid fa-code"></i>
+                <h3>Développement Web</h3>
+                <p>Création de sites vitrines et applications web sur mesure.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-pen-nib"></i>
+                <h3>Design Graphique</h3>
+                <p>Conception de logos, identités visuelles et affiches.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-video"></i>
+                <h3>Montage Vidéo</h3>
+                <p>Production et édition de contenus vidéos professionnels.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h3>Animation</h3>
+                <p>Animations modernes pour dynamiser vos interfaces.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-hashtag"></i>
+                <h3>Community Management</h3>
+                <p>Gestion et croissance de vos réseaux sociaux.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-laptop-medical"></i>
+                <h3>Assistance Informatique</h3>
+                <p>Support technique et maintenance de vos systèmes.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h3>Formation Numérique</h3>
+                <p>Apprentissage et montée en compétences dans le digital.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-rocket"></i>
+                <h3>Développement Digital</h3>
+                <p>Stratégies globales pour votre croissance numérique.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats">
+        <div class="stat-item">
+            <h3>+50</h3>
+            <p>Projets réalisés</p>
+        </div>
+        <div class="stat-item">
+            <h3>+20</h3>
+            <p>Clients satisfaits</p>
+        </div>
+        <div class="stat-item">
+            <h3>+10</h3>
+            <p>Professionnels</p>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <h2 class="section-title">Nos Réalisations</h2>
+        <p style="text-align: center; margin-bottom: 30px;">Découvrez nos logos, affiches, vidéos et captures de sites web qui témoignent de notre savoir-faire.</p>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">Image / Capture Projet 1</div>
+            <div class="portfolio-item">Image / Logo Projet 2</div>
+            <div class="portfolio-item">Affiche / Image Projet 3</div>
+            <div class="portfolio-item">Aperçu Vidéo Projet 4</div>
+        </div>
+    </section>
+
+    <section id="equipe">
+        <h2 class="section-title">Notre Équipe</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="fidèle.jpeg" alt="Fidèle DJOTTO">
+                <h3>Fidèle DJOTTO</h3>
+                <p>Administrateur Cybersécurité</p>
+                <a href="https://kloo.me/faithfulservices" class="btn-member-portfolio">Voir le portfolio</a>
+            </div>
+            <div class="team-member">
+                <img src="nicanor.png" alt="Yao Yessoulomè Nicanor KOUSSAHOUE">
+                <h3>Yao Yessoulomè Nicanor KOUSSAHOUE</h3>
+                <p>Développeur Full-Stack Web & Mobile</p>
+                <a href="https://foo-nica.github.io/nicanorkoussahoue/" class="btn-member-portfolio">Voir le portfolio</a>
+            </div>
+            <div class="team-member">
+                <img src="Bernice.jpg" alt="Bernice MALOMON">
+                <h3>Bernice MALOMON</h3>
+                <p>Développeuse Frontend</p>
+                <a href="#" class="btn-member-portfolio">Voir le portfolio</a>
+            </div>
+            <div class="team-member">
+                <img src="Martine.jpeg" alt="Martine RACHIDI">
+                <h3>Martine RACHIDI</h3>
+                <p>Développeuse Frontend</p>
+                <a href="#" class="btn-member-portfolio">Voir le portfolio</a>
+            </div>
+            <div class="team-member">
+                <img src="Blaise.jpg" alt="Blaise GBADESSI">
+                <h3>Blaise GBADESSI</h3>
+                <p>Développeur Backend</p>
+                <a href="#" class="btn-member-portfolio">Voir le portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Nous Contacter</h2>
+        <div class="contact-container">
+            <div>
+                <h3>Écrivez-nous</h3>
+                <p style="margin-bottom: 20px;">Laissez-nous un message pour toute demande de devis ou de partenariat.</p>
+                <form action="#" method="POST" id="contactForm">
+                    <input type="text" placeholder="Nom et prénoms" required>
+                    <input type="email" placeholder="Adresse Email" required>
+                    <textarea rows="5" placeholder="Votre message..." required></textarea>
+                    <button type="submit" class="submit-btn">Envoyer le message</button>
+                </form>
+            </div>
+            <div>
+                <h3>Nos Coordonnées</h3>
+                <p><i class="fa-solid fa-envelope" style="color: var(--primary-green); margin-right: 10px;"></i> contact@digitalfriends.com</p>
+                <p style="margin-top: 15px;"><i class="fa-solid fa-phone" style="color: var(--primary-green); margin-right: 10px;"></i> +229 XX XX XX XX</p>
+                
+                <h3 style="margin-top: 30px;">Suivez-nous</h3>
+                <div style="font-size: 24px; gap: 15px; display: flex; margin-top: 10px;">
+                    <a href="https://www.facebook.com/profile.php?id=61586894920556" style="color: var(--primary-green);"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" style="color: var(--primary-green);"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://wa.me/2290161926418?text=Bonjour%20l%27%C3%A9quipe%20de%20Digital%20friends.%20J%27aimerais%20solliciter%20vos%20services." style="color: var(--primary-green);"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Digital Friends - Le Réseau des Jeunes Professionnels du Numérique. Tous droits réservés.</p>
+    </footer>
+
+    <a href="https://wa.me/2290161926418?text=Bonjour%20l%27%C3%A9quipe%20de%20Digital%20friends.%20J%27aimerais%20solliciter%20vos%20services." class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Simulation d'envoi de formulaire
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Merci ! Votre message a été simulé avec succès pour cette version vitrine.');
+        });
+
+        // Gestion du Menu Mobile
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        const menuLinks = document.querySelectorAll('.nav-links a');
+        const menuIcon = mobileMenu.querySelector('i');
+
+        // Ouvrir / Fermer le menu au clic sur le bouton Hamburger
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // Changer l'icône (barres <-> croix)
+            if (navLinks.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            } else {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+
+        // Fermer le menu automatiquement quand on clique sur un lien
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+    </script>
+</body>
+</html>
